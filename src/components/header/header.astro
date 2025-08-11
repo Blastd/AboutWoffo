@@ -1,0 +1,33 @@
+<header>
+    <a href="#links">Links</a>
+    <a href="#projects">Projects</a>
+</header>
+
+
+<style>
+    :root {
+        --header-link-hover-bg: var(--dark);
+    }
+
+    header {
+        display: flex;
+        background-color: var(--light);
+
+        a {
+            color: var(--text);
+            text-decoration: none;
+            padding: 0.5em 1em;
+            transition-duration: 120ms;
+        }
+
+        a:hover {
+            background-color: var(--header-link-hover-bg);
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --header-link-hover-bg: var(--accent);
+        }
+    }
+</style>

@@ -1,0 +1,27 @@
+<style is:global>
+    @import url(https://fonts.bunny.net/css?family=albert-sans:400,600|besley:400,600);
+    
+    /* Current palette https://coolors.co/c5d7ec-272838-f18f01 */
+    :root {
+        --light: #e2e9f1;
+        --dark: #272838;
+        --accent: #f18f01;
+
+        --text: var(--dark);
+    }
+
+	* {
+		font-family: 'Albert sans', sans-serif;
+	}
+
+    a {
+        text-decoration: none;
+        color: var(--text);
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            -text: #ddd;
+        }
+    }
+</style>

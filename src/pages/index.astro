@@ -1,5 +1,7 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import GlobalStyles from '../components/GlobalStyles.astro';
+import Scene from '../components/Scene';
+import Carousel from '../components/carousel/Carousel';
 import Layout from '../layouts/Layout.astro';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
@@ -7,5 +9,8 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-	<Welcome />
+	<!-- <Scene client:visible/> -->
+	<Carousel client:load/>
+	<GlobalStyles/>
+	<h1>Drew</h1> 
 </Layout>
