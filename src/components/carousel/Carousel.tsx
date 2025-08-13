@@ -1,10 +1,30 @@
 import CarouselImage from "./CarouselImage"
-import {CAROUSEL_IMAGES} from "./util"
+import {CAROUSEL_IMAGES, CarouselContext} from "./util"
 import "./carousel.css";
+import { useEffect, useRef, useState } from "react";
 
 export default function Carousel() {
-    return <div className="carousel">
-        {CAROUSEL_IMAGES.map ((img, key) => <CarouselImage 
-            key={key} src={img}/>)}
+
+    const [scroll, setScroll] = useState(0);
+    const galleryRef = useRef<HTMLDivElement>(null!);
+    const audioRef = useRef<HTMLAudioElement>(null!);
+
+    useEffect(()=> {
+        const loopHandle = setInterval(() => setScroll(prev => (prev + 1) % CAROUSEL_IMAGES.length), 4000);
+        return () => clearInterval(loopHandle);
+    }, []);
+
+    useEffect(()=>{
+        galleryRef.current.scroll({left: window.innerWidth * scroll, behavior: "smooth"})
+    }, [scroll])
+
+    return <div className="carousel" ref={galleryRef}>
+        <audio ref={audioRef} src="/squeak.mp3"/>
+        <CarouselContext.Provider value={{play: () => audioRef.current.play()}}>
+            {CAROUSEL_IMAGES.map ((img, key) => (
+                <CarouselImage key={key} src={img}/>
+            ))}
+        </CarouselContext.Provider>
+        
     </div>
 }

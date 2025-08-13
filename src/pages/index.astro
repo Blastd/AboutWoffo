@@ -1,6 +1,5 @@
 ---
 import GlobalStyles from '../components/GlobalStyles.astro';
-import Scene from '../components/Scene';
 import Carousel from '../components/carousel/Carousel';
 import Layout from '../layouts/Layout.astro';
 
@@ -12,5 +11,23 @@ import Layout from '../layouts/Layout.astro';
 	<!-- <Scene client:visible/> -->
 	<Carousel client:load/>
 	<GlobalStyles/>
-	<h1>Drew</h1> 
+	<div class="page">
+		<h1 class="page-title">Drew's hideout</h1>
+	</div>
+	
 </Layout>
+
+<style>
+	div.page {
+		background-color: var(--very-dark);
+	}
+
+	h1.page-title {
+		margin: 0;
+		padding: .5em;
+		text-shadow: 0rem 0rem .1em var(--accent);
+		text-align: center;
+		background-color: var(--dark);
+		background: radial-gradient(circle, var(--medium) 0%, transparent 60%);
+	}
+</style>

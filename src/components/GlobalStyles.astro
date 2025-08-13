@@ -1,27 +1,39 @@
 <style is:global>
-    @import url(https://fonts.bunny.net/css?family=albert-sans:400,600|besley:400,600);
+    @import url(https://fonts.bunny.net/css?family=albert-sans:400,600|besley:400,600|eagle-lake:400);
     
-    /* Current palette https://coolors.co/c5d7ec-272838-f18f01 */
-    :root {
-        --light: #e2e9f1;
-        --dark: #272838;
-        --accent: #f18f01;
+    @font-face {
+        font-family: "Celtic";
+        src: url("/src/assets/CelticPlain.woff2");
+    }
 
-        --text: var(--dark);
+    /* Current palette  https://coolors.co/c5d7ec-272838-f18f01
+                        https://coolors.co/a9cef4-272838-f18f01 */
+    :root {
+        --text: #eee;
+        --light: #a9cef4;
+        --medium: #2f79c4;
+        --dark: #1e254e;
+        --very-dark: #1a1f3b;
+        --accent: #ec8f38;
+    }
+
+    html, body {
+
     }
 
 	* {
+        box-sizing: border-box;
 		font-family: 'Albert sans', sans-serif;
+        color: var(--text);
 	}
 
-    a {
-        text-decoration: none;
-        color: var(--text);
+    h1, h2 {
+        font-family: 'Celtic';
     }
 
-    @media (prefers-color-scheme: dark) {
-        :root {
-            -text: #ddd;
-        }
+    div.page {
+        
     }
+
+    @media (prefers-color-scheme: dark) {}
 </style>

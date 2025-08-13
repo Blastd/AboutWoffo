@@ -1,33 +1,60 @@
 <header>
-    <a href="#links">Links</a>
-    <a href="#projects">Projects</a>
+    <a href="#links" data-text="Links">Links</a>
+    <a href="#projects" data-text="Projects">Projects</a>
 </header>
 
 
 <style>
     :root {
-        --header-link-hover-bg: var(--dark);
+        --header-link-hover-bg: var(--medium);
     }
 
     header {
         display: flex;
-        background-color: var(--light);
+        background-color: var(--very-dark);
 
         a {
+            font-size: 1.15em;
+            position: relative;
             color: var(--text);
             text-decoration: none;
             padding: 0.5em 1em;
-            transition-duration: 120ms;
+            transition-duration: 240ms;
+            min-width: 7rem;
+            text-align: left;
         }
 
-        a:hover {
-            background-color: var(--header-link-hover-bg);
+        a::after {
+            position: absolute;
+            left: 12%;
+            top: 50%;
+            transform: translate(0%, -50%);
+            font-family: 'Celtic';
+            font-size: 1.25em;
+            content: attr(data-text);
+            color: transparent;
+            transition-duration: 240ms;
+            opacity: 0;
+        }
+
+        a:hover,
+        a:active {
+            letter-spacing: .15em;
+            color: transparent;
+        }
+
+        a:hover::after,
+        a:active::after {
+            background: radial-gradient(closest-side, var(--header-link-hover-bg) 0%, transparent 100%);
+            color: var(--light);
+            opacity: 1;
+        }
+
+        a:active::after {
+            color: var(--accent);
+            scale: 0.9;
         }
     }
 
-    @media (prefers-color-scheme: dark) {
-        :root {
-            --header-link-hover-bg: var(--accent);
-        }
-    }
+    @media (prefers-color-scheme: dark) {}
 </style>

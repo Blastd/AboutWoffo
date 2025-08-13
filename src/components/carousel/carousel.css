@@ -16,9 +16,9 @@
     scroll-snap-align: start;
     text-align: center;
     min-height: 300px;
-    height: 80vh;
+    height: 70vh;
 
-    img {
+    .centered-image {
         position: absolute;
         top: 0px;
         left: 50%;
@@ -26,9 +26,20 @@
         height: 100%;
     }
 
+    a.attribution {
+        position: absolute;
+        bottom: 1%;
+        right: 1%;
+    }
+
     img.backdrop {
+        position: absolute;
         z-index: -1;
-        width: 100%;
-        filter: blur(24px);
+        width: 120%;
+        height: 120%;
+        top: -10%;
+        left: -10%;
+        object-fit: cover;
+        filter: blur(6px) brightness(.8);
     }
 }
