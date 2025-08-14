@@ -26,6 +26,14 @@
         height: 100%;
     }
 
+    .centered-image img {
+        transition-duration: 80ms;
+    }
+
+    .centered-image.clicked img {
+        transform: scale(0.9) rotate(5deg);
+    }
+
     a.attribution {
         position: absolute;
         bottom: 1%;

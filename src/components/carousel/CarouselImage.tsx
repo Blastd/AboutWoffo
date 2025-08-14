@@ -1,4 +1,4 @@
-import { useRef, type MouseEvent, type RefObject } from "react";
+import { useEffect, useRef, useState, type MouseEvent, type RefObject } from "react";
 import { useCarouselContext, type BoopableImage } from "./util";
 
 const shouldBoop = (e: MouseEvent<HTMLImageElement>,
@@ -21,20 +21,30 @@ const shouldBoop = (e: MouseEvent<HTMLImageElement>,
 
 export default function CarouselImage({src}: Readonly<{src: BoopableImage}>) {
     const imgRef = useRef<HTMLImageElement>(null!);
-
+    const [clicked, setClicked] = useState(false);
     const {play} = useCarouselContext();
 
+    useEffect(()=>{
+        if (!clicked) return;
+        const handler = setTimeout(()=>setClicked(false), 240);
+        return () => clearTimeout(handler);
+    }, [clicked]);
+
     return <div className="carousel-image">
-        <div className="centered-image">
+        <div className={`centered-image ${clicked ? "clicked" : ""}`}>
             {src.attribution && <a className="attribution"
-            href={src.attribution.authorLink}>
-                {src.attribution.authorName}
+                target="_blank"
+                href={src.attribution.authorLink}>
+                    {src.attribution.authorName}
             </a>}
             <img ref={imgRef}
                 src={src.url}
                 alt={src.alt}
                 onClick={(e) => {
-                    if (shouldBoop(e, imgRef, src)) { play(); }
+                    if (shouldBoop(e, imgRef, src)) {
+                        play();
+                        setClicked(true);
+                    }
                 }}/>
         </div>
         <img aria-hidden className="backdrop" src={src.url}/>

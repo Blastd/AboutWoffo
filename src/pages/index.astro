@@ -13,6 +13,11 @@ import Layout from '../layouts/Layout.astro';
 	<GlobalStyles/>
 	<div class="page">
 		<h1 class="page-title">Drew's hideout</h1>
+		<div class="page-content">
+			<h2 id="links">Links</h2>
+			<div style="min-height: 200px;"></div>
+			<h2 id="projects">Projects</h2>
+		</div>
 	</div>
 	
 </Layout>
@@ -20,14 +25,24 @@ import Layout from '../layouts/Layout.astro';
 <style>
 	div.page {
 		background-color: var(--very-dark);
+
+		h1.page-title,
+		h2.page-title {
+			margin: 0;
+			padding: .5em;
+			text-shadow: 0rem 0rem .1em var(--accent);
+			text-align: center;
+			background-color: var(--dark);
+			background: radial-gradient(circle, var(--medium) 0%, transparent 60%);
+			border: 1px solid #fff2;
+			border-left: none;
+			border-right: none;
+		}
+
+		div.page-content {
+			padding: 1em;
+		}
 	}
 
-	h1.page-title {
-		margin: 0;
-		padding: .5em;
-		text-shadow: 0rem 0rem .1em var(--accent);
-		text-align: center;
-		background-color: var(--dark);
-		background: radial-gradient(circle, var(--medium) 0%, transparent 60%);
-	}
+	
 </style>
