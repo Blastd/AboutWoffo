@@ -34,7 +34,7 @@ export const CAROUSEL_IMAGES: BoopableImage[] = [
     {
         url: "/carousel/BUSHES.webp",
         originalSize: [1200, 800],
-        alt: "Drew, a Folf with shades of blue and black, peeking out of the bushes, looking at the camera",
+        alt: "Drew, a Fox Wolf hybrid featuring fur of blue and black shades, and an orange nose, peeking out of the bushes, looking at the camera",
         interactions: [
             {
                 location: [684, 405],
@@ -49,12 +49,31 @@ export const CAROUSEL_IMAGES: BoopableImage[] = [
     {
         url: "/carousel/PEACE.webp",
         originalSize: [1200, 800],
-        alt: "Drew, a Fox-wolf hybrid with shades of blue and black, alongside some orange highlights, waves the peace gesture in front of the camera.",
+        alt: "Drew, a Fox Wolf hybrid featuring fur of blue and black shades, and an orange nose, does the peace gesture in front of the camera.",
         interactions: [
             {
                 location: [600, 375],
                 radius: 30
             }
-        ]
+        ],
+        attribution: {
+            authorLink: "https://x.com/RevSkulldog",
+            authorName: "Rev Skulldog"
+        }
+    },
+    {
+        url: "/carousel/BLEP.webp",
+        originalSize: [1200, 800],
+        alt: "Drew, a Fox Wolf hybrid featuring fur of blue and black shades, and an orange nose, smiling with his tongue out.",
+        interactions: [
+            {
+                location: [631, 447],
+                radius: 30
+            }
+        ],
+        attribution: {
+            authorLink: "https://www.instagram.com/montagutiluca/",
+            authorName: "Luka Montaguti"
+        }
     }
 ]

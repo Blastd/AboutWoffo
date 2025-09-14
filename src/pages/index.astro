@@ -13,13 +13,12 @@ import Layout from '../layouts/Layout.astro';
 	<Carousel client:load/>
 	<GlobalStyles/>
 	<div class="page">
-		<h1 class="page-title">Drew's hideout</h1>
 		<div class="page-content" id="links">
-			<h2>Links</h2>
+			<h1 class="page-title">Links</h1>
 			<Scene client:load/>
 		</div>
 		<div class="page-content" id="projects">
-			<h2>Projects</h2>
+			<h1 class="page-title">Projects</h1>
 		</div>
 	</div>
 	
@@ -48,7 +47,7 @@ import Layout from '../layouts/Layout.astro';
 		}
 
 		div.page-content {
-			scroll-snap-align: start;
+			scroll-snap-align: end;
 			display: flex;
 			flex-direction: column;
 			padding: 1em;

@@ -32,11 +32,6 @@ export default function CarouselImage({src}: Readonly<{src: BoopableImage}>) {
 
     return <div className="carousel-image">
         <div className={`centered-image ${clicked ? "clicked" : ""}`}>
-            {src.attribution && <a className="attribution"
-                target="_blank"
-                href={src.attribution.authorLink}>
-                    {src.attribution.authorName}
-            </a>}
             <img ref={imgRef}
                 src={src.url}
                 alt={src.alt}
@@ -47,6 +42,11 @@ export default function CarouselImage({src}: Readonly<{src: BoopableImage}>) {
                     }
                 }}/>
         </div>
+        {src.attribution && <a className="attribution"
+                target="_blank"
+                href={src.attribution.authorLink}>
+                    {src.attribution.authorName}
+            </a>}
         <img aria-hidden className="backdrop" src={src.url}/>
     </div>
 }
