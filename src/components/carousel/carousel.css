@@ -17,7 +17,7 @@
     text-align: center;
     min-height: 300px;
     height: calc(100vh - 40px);
-    object-fit: contain;
+    object-fit: cover;
 
     .centered-image {
         position: absolute;
@@ -29,6 +29,7 @@
 
     .centered-image img {
         transition-duration: 80ms;
+        max-height: calc(100vh - 40px);
     }
 
     .centered-image.clicked img {
@@ -39,6 +40,7 @@
         position: absolute;
         bottom: 1%;
         right: 1%;
+        text-shadow: 0px 0px 4px black;
     }
 
     img.backdrop {

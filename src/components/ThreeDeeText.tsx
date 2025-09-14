@@ -61,6 +61,8 @@ export function ThreeDeeText (props: FadingTextProps & {
                 position={[-finalImageSize / 2 - SPACING, 0, 0]}
                 onPointerOver={() => setHovered(true)}
                 onPointerOut={() => setHovered(false)}
+                onPointerDown={() => setHovered(true)}
+                onPointerLeave={() => setHovered(false)}
                 onClick={props.interaction.onClick}/>}
             <Text fontSize={props.fontSize}
                 position={[(hasImage ? finalImageSize : 0) / 2, 0, 0]}
@@ -70,6 +72,8 @@ export function ThreeDeeText (props: FadingTextProps & {
                 anchorY="middle"
                 onPointerOver={() => setHovered(true)}
                 onPointerOut={() => setHovered(false)}
+                onPointerDown={() => setHovered(true)}
+                onPointerLeave={() => setHovered(false)}
                 onClick={props.interaction.onClick}>
                     {props.text}
                 {/* Attach animated material */}

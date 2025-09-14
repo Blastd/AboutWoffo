@@ -77,6 +77,21 @@ export default function Scene() {
                         url: "/images/twitter.png",
                         size: 5
                     }}/>
+                <ThreeDeeText
+                    visible={shouldOpen}
+                    text="FurTrack"
+                    position={[-30, 15, -2]}
+                    rotation={[-4*Math.PI/9, Math.PI/10, Math.PI*-1/70]}
+                    fontSize={6}
+                    color="black"
+                    delay={shouldOpen ? 1300 : 0}
+                    interaction={{
+                        onClick: () => navigate("https://smol.woffo.ovh/thawooffurtrack")
+                    }}
+                    image={{
+                        url: "/images/furtrack.png",
+                        size: 5
+                    }}/>
             </group>
         </Canvas>
     </>
