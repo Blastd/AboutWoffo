@@ -33,7 +33,7 @@ export function ThreeDeeText (props: FadingTextProps & {
     const meshRef = useRef<THREE.Group>(null)
 
     const hasImage = !!props.image?.url;
-    const finalImageSize = props.image?.size ?? 3;
+    const finalImageSize = props.image?.size ?? 5;
 
     const { opacity, imageSize } = useSpring({
         opacity: props.visible ? 1 : 0,

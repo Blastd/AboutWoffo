@@ -4,8 +4,11 @@ import { PerspectiveCamera } from "@react-three/drei";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Color } from "three";
 import { ThreeDeeText } from "./ThreeDeeText";
+import { LINKS, paginate } from "./links";
 
 const navigate = (url: string) => { window.open(url, "_blank"); }
+
+const paginated = paginate(LINKS);
 
 export default function Scene() {
     const canvasRef = useRef<HTMLCanvasElement>(null!);
@@ -47,51 +50,19 @@ export default function Scene() {
                 <Suspense fallback={null}>
                     <Tome castShadow shouldOpen={shouldOpen}/>
                 </Suspense>
-                <ThreeDeeText
+                {paginated.left.map ((v, i) =><ThreeDeeText
                     visible={shouldOpen}
-                    text="Instagram"
-                    position={[-30, 15, -18]}
+                    text={v.text}
+                    position={[-30, 15, -18+(8*i)]}
                     rotation={[-4*Math.PI/9, Math.PI/10, Math.PI*-1/70]}
                     fontSize={5}
                     color="black"
                     delay={shouldOpen ? 1300 : 0}
                     interaction={{
-                        onClick: () => navigate("https://smol.woffo.ovh/thawoofinsta")
+                        onClick: () => navigate(v.url)
                     }}
-                    image={{
-                        url: "/images/instagram.png",
-                        size: 5
-                    }}/>
-                <ThreeDeeText
-                    visible={shouldOpen}
-                    text="Twitter"
-                    position={[-30, 15, -10]}
-                    rotation={[-4*Math.PI/9, Math.PI/10, Math.PI*-1/70]}
-                    fontSize={6}
-                    color="black"
-                    delay={shouldOpen ? 1300 : 0}
-                    interaction={{
-                        onClick: () => navigate("https://smol.woffo.ovh/thawoofx")
-                    }}
-                    image={{
-                        url: "/images/twitter.png",
-                        size: 5
-                    }}/>
-                <ThreeDeeText
-                    visible={shouldOpen}
-                    text="FurTrack"
-                    position={[-30, 15, -2]}
-                    rotation={[-4*Math.PI/9, Math.PI/10, Math.PI*-1/70]}
-                    fontSize={6}
-                    color="black"
-                    delay={shouldOpen ? 1300 : 0}
-                    interaction={{
-                        onClick: () => navigate("https://smol.woffo.ovh/thawooffurtrack")
-                    }}
-                    image={{
-                        url: "/images/furtrack.png",
-                        size: 5
-                    }}/>
+                    image={v.image}/>
+                )}
             </group>
         </Canvas>
     </>
