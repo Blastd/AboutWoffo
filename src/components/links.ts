@@ -41,5 +41,12 @@ export const LINKS: Link[] = [
         image: {
             url: "/images/furtrack.png"
         }
+    },
+    {
+        url: "https://smol.woffo.ovh/thawooffa",
+        text: "FurAffinity",
+        image: {
+            url: "/images/furaffinity.png"
+        }
     }
 ]

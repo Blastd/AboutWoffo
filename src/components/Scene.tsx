@@ -53,8 +53,21 @@ export default function Scene() {
                 {paginated.left.map ((v, i) =><ThreeDeeText
                     visible={shouldOpen}
                     text={v.text}
-                    position={[-30, 15, -18+(8*i)]}
+                    position={[-31, 15, -19+(8*i)]}
                     rotation={[-4*Math.PI/9, Math.PI/10, Math.PI*-1/70]}
+                    fontSize={5}
+                    color="black"
+                    delay={shouldOpen ? 1300 : 0}
+                    interaction={{
+                        onClick: () => navigate(v.url)
+                    }}
+                    image={v.image}/>
+                )}
+                {paginated.right.map ((v, i) =><ThreeDeeText
+                    visible={shouldOpen}
+                    text={v.text}
+                    position={[7, 7, -19+(8*i)]}
+                    rotation={[-4*Math.PI/9, -Math.PI/10, Math.PI*1/70]}
                     fontSize={5}
                     color="black"
                     delay={shouldOpen ? 1300 : 0}
