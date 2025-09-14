@@ -6,7 +6,7 @@ Files: .\src\assets\tome.glb [4.1MB] > D:\Projects\Websites\AboutWoffo\tome-tran
 
 import * as THREE from 'three'
 import React, { useEffect, useRef, useState, type JSX } from 'react'
-import { useGraph } from '@react-three/fiber'
+import { useFrame, useGraph } from '@react-three/fiber'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import { type GLTF, SkeletonUtils } from 'three-stdlib'
 
@@ -34,42 +34,70 @@ type GLTFResult = GLTF & {
   animations: GLTFAction[]
 }
 
-const OpenAction = "OpenAction";
-const CloseAction = "CloseAction";
+const OPEN_ANIMATION = "OpenAction";
+const CLOSE_ANIMATION = "CloseAction";
 
-export function Tome(props: JSX.IntrinsicElements['group'] & { shouldOpen?: boolean }) {
-  const [isOpen, setOpen] = useState(false);
-  const [isInit, setInit] = useState(false);
-
+export function Tome(props: JSX.IntrinsicElements['group'] & { shouldOpen: boolean }) {
   const group = useRef<THREE.Group>(null!);
   const { scene, animations } = useGLTF('/tome.glb');
   const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes, materials } = useGraph(clone) as unknown as GLTFResult;
-  const { actions } = useAnimations(animations, group)
+  const { actions, mixer } = useAnimations(animations, group);
+  const actionsRef = useRef<{
+    open: THREE.AnimationAction | null
+    close: THREE.AnimationAction | null
+  }>({ open: null, close: null })
+  const currentActionRef = useRef<THREE.AnimationAction | null>(null)
+  const lastStateRef = useRef<boolean | null>(null)
 
   useEffect(()=>{
-    if (actions[CloseAction]) {
-      actions[CloseAction].setLoop(THREE.LoopOnce, 1);
-      actions[CloseAction].clampWhenFinished = true;  
+    const openAnimation = THREE.AnimationClip.findByName(animations, OPEN_ANIMATION);
+    const closeAnimation = THREE.AnimationClip.findByName(animations, CLOSE_ANIMATION);
+
+    const openAction = openAnimation && mixer.clipAction(openAnimation);
+    const closeAction = closeAnimation && mixer.clipAction(closeAnimation);
+
+    if (openAction && closeAction) {
+      // Set config
+      openAction.clampWhenFinished = true
+      closeAction.clampWhenFinished = true
+      openAction.loop = THREE.LoopOnce
+      closeAction.loop = THREE.LoopOnce
+
+      actionsRef.current = {
+        open: openAction,
+        close: closeAction,
+      }
+      // Start with closed
+      currentActionRef.current = closeAction;
+      currentActionRef.current.play()
     }
-    if (actions[OpenAction]) {
-      actions[OpenAction].setLoop(THREE.LoopOnce, 1);
-      actions[OpenAction].clampWhenFinished = true;  
-    }
-  }, [])
+  }, [animations, scene])
 
   useEffect(()=> {
-    if (!actions || props.shouldOpen == undefined) return;
-    if (props.shouldOpen && !isOpen) {
-      actions[CloseAction]?.stop();
-      actions[OpenAction]?.play();
-      setOpen(true);
-    } else if (!props.shouldOpen && isOpen) {
-      actions[OpenAction]?.stop();
-      actions[CloseAction]?.play();
-      setOpen(false);
+    if (!actionsRef.current.open || !actionsRef.current.close) return
+    if (lastStateRef.current === props.shouldOpen) return
+
+    const nextAction = props.shouldOpen ? actionsRef.current.open : actionsRef.current.close
+    console.log(nextAction);
+    const currentAction = currentActionRef.current
+
+    if (currentAction !== nextAction) {
+      nextAction.reset().play();
+      if (currentAction) {
+        currentAction.crossFadeTo(nextAction, 0.5, false);
+      } else {
+        nextAction.play()
+      }
+      currentActionRef.current = nextAction;
+      lastStateRef.current = props.shouldOpen;
     }
-  }, [actions, props.shouldOpen])
+  }, [props.shouldOpen]);
+
+  // Update mixer each frame
+  useFrame((_, delta) => {
+    mixer.update(delta)
+  })
 
   return (
     <group ref={group} {...props} dispose={null}>

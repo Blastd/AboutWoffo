@@ -7,12 +7,15 @@ import { Color } from "three";
 export default function Scene() {
     const canvasRef = useRef<HTMLCanvasElement>(null!);
     const [shouldOpen, setShouldOpen] = useState(false);
-    useEffect(()=> {
+    const shouldBookOpen = () => {
         const height = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
-        document.addEventListener('scroll', () => {
-            const box = canvasRef.current.getBoundingClientRect();
-            setShouldOpen(box.top >= 0 && box.bottom <= height)
-        })
+        const box = canvasRef.current.getBoundingClientRect();
+        return box.top >= 0 && box.bottom <= height;
+    };
+
+    useEffect(()=> {
+        setShouldOpen(shouldBookOpen());
+        document.addEventListener('scroll', ()=>setShouldOpen(shouldBookOpen()));
     }, [])
 
     return <>
