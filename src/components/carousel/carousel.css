@@ -1,10 +1,15 @@
 .carousel {
     display: flex;
-    width: 100vw;
+    width: 100%;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     scroll-snap-stop: always;
-    overflow: scroll;
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
 }
 
 .carousel-image {

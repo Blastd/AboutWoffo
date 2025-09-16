@@ -20,8 +20,7 @@ type GLTFResult = GLTF & {
   nodes: {
     PageBottom: THREE.SkinnedMesh
     PageBottom001: THREE.SkinnedMesh
-    Plane_1: THREE.SkinnedMesh
-    Plane_2: THREE.SkinnedMesh
+    Plane: THREE.SkinnedMesh
     Plane001: THREE.SkinnedMesh
     Plane002: THREE.SkinnedMesh
     Bone: THREE.Bone
@@ -107,10 +106,7 @@ export function Tome(props: JSX.IntrinsicElements['group'] & { shouldOpen: boole
         </group>
         <skinnedMesh name="PageBottom" geometry={nodes.PageBottom.geometry} material={materials.Material} skeleton={nodes.PageBottom.skeleton} position={[-20, 0, 0]} />
         <skinnedMesh name="PageBottom001" geometry={nodes.PageBottom001.geometry} material={materials.Material} skeleton={nodes.PageBottom001.skeleton} position={[-20, 0, 0]} />
-        <group name="Plane" position={[-20, 0, 0]}>
-          <skinnedMesh name="Plane_1" geometry={nodes.Plane_1.geometry} material={materials.AncientTome} skeleton={nodes.Plane_1.skeleton} />
-          <skinnedMesh name="Plane_2" geometry={nodes.Plane_2.geometry} material={materials['Cover.back']} skeleton={nodes.Plane_2.skeleton} />
-        </group>
+        <skinnedMesh name="Plane" geometry={nodes.Plane.geometry} material={materials.AncientTome} skeleton={nodes.Plane.skeleton} position={[-20, 0, 0]} />
         <skinnedMesh name="Plane001" geometry={nodes.Plane001.geometry} material={materials.AncientTome} skeleton={nodes.Plane001.skeleton} position={[-20, 0, 0]} />
         <skinnedMesh name="Plane002" geometry={nodes.Plane002.geometry} material={materials.AncientTome} skeleton={nodes.Plane002.skeleton} position={[-20, 0, 0]} />
       </group>
